@@ -1,4 +1,4 @@
-# Test
+# Unravel · Flutter 抽卡与收藏 Demo
 
 Test 是一个基于 Flutter 的纯前端抽卡 Demo，用于演示启动动画、四 Tab 页面、抽卡交互、图鉴筛选和前后端分离接入边界。
 
@@ -33,7 +33,7 @@ AppConfig -> AppBootstrap -> GachaRepository
 
 ## Environment
 
-建议使用 Flutter stable 和 Dart 3.13 及以上环境。首次启动或修改依赖后执行：
+pubspec.yaml声明Dart SDK为 `^3.13.1`，需准备包含满足该约束Dart版本的Flutter SDK。首次启动或修改依赖后执行：
 
 ```bash
 flutter pub get
@@ -48,6 +48,8 @@ flutter pub get
 | `SKIP_SPLASH` | `false` | 是否跳过启动动画，适合自动化测试和快速联调 |
 
 ## Common Commands
+
+命令中的YOUR_DEVICE_ID与YOUR_IOS_DEVICE_ID需要替换为flutter devices输出的实际标识。flavor部分使用文本模板，尚无对应工程配置，不能直接运行。
 
 ### 1. Check devices
 
@@ -68,7 +70,7 @@ flutter run --dart-define=USE_MOCK_API=true
 指定设备启动：
 
 ```bash
-flutter run -d <device-id>
+flutter run -d YOUR_DEVICE_ID
 ```
 
 跳过启动动画快速联调：
@@ -112,7 +114,7 @@ flutter run -d macos \
 也可以把 `macos` 替换为 Android 模拟器、iOS 模拟器或真机的设备 ID：
 
 ```bash
-flutter run -d <device-id> \
+flutter run -d YOUR_DEVICE_ID \
   --dart-define=USE_MOCK_API=true
 ```
 
@@ -218,7 +220,7 @@ flutter build ipa --release
 真机或模拟器运行：
 
 ```bash
-flutter run -d <ios-device-id>
+flutter run -d YOUR_IOS_DEVICE_ID
 ```
 
 iOS 打包需要 macOS、Xcode、有效签名证书和 provisioning profile。
@@ -256,7 +258,7 @@ flutter pub get
 
 当前项目还没有定义 flavor。只有在补齐 Android/iOS 的 flavor 配置、入口文件和签名配置后，才使用以下模板：
 
-```bash
+```text
 flutter run --flavor <flavor-name> -t lib/main_<flavor-name>.dart
 flutter build apk --flavor <flavor-name> -t lib/main_<flavor-name>.dart
 flutter build appbundle --flavor <flavor-name> -t lib/main_<flavor-name>.dart
@@ -270,3 +272,19 @@ lib/main_dev.dart
 lib/main_staging.dart
 lib/main_prod.dart
 ```
+
+<!-- BEGIN chovy-readme-review -->
+## 源码导航与接入核对
+
+| 层次 | 位置 | 职责 |
+|---|---|---|
+| 启动与Tab | `lib/main.dart`、`lib/app/` | Splash、初始化、首页/抽卡/收藏/个人页 |
+| 运行参数 | [app_config.dart](lib/core/config/app_config.dart) | 编译期参数与8秒请求超时 |
+| 抽卡业务 | `lib/features/gacha/` | Controller、模型、Mock与远端Repository |
+| 网络层 | `lib/core/network/` | API接口、HTTP实现与异常 |
+| 通用界面 | `lib/shared/widgets/` | 卡面、稀有度、布局等组件 |
+
+默认 `USE_MOCK_API=true`，不设置后端地址也可使用Mock流程；远端模式需同时关闭Mock并设置API_BASE_URL。参数通过dart-define编译注入，不是运行后修改.env即可生效。
+
+后端协议见[API契约](docs/backend-api-contract.zh-CN.md)，目录说明见[工程结构](docs/project-structure.zh-CN.md)，测试说明见[测试文档](docs/test.md)。Android/iOS与桌面/网页目录存在不等于各平台都已完成当前环境验收。本轮未运行Flutter或平台构建，已有验证说明按原记录保留。
+<!-- END chovy-readme-review -->
