@@ -4,6 +4,17 @@ Test 是一个基于 Flutter 的纯前端抽卡 Demo，用于演示启动动画�
 
 当前仓库只负责 Flutter 客户端，抽卡接口、用户数据、概率、资源扣除和保底持久化由独立后端服务负责。默认使用本地 Mock，因此不依赖后端也可以启动和验收 UI。
 
+<!-- BEGIN project-discovery -->
+## 项目定位与实践入口
+
+Flutter + Dart gacha and card collection demo with animations, state management and mock/remote API adapters. 跨平台抽卡、图鉴与客户端架构学习示例。
+
+适合从以下入口阅读实现与接入条件：
+
+- [客户端分层设计](docs/project-structure.zh-CN.md)
+- [后端接口约定](docs/backend-api-contract.zh-CN.md)
+<!-- END project-discovery -->
+
 ## Demo Features
 
 - 启动时展示粒子、光环和品牌文字动画
