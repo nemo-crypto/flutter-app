@@ -1,5 +1,9 @@
 # Unravel · Flutter 抽卡与收藏 Demo
 
+**[在线体验 · 打开 Unravel 抽卡与收藏](https://nemo-crypto.github.io/flutter-app/)**
+
+网页演示使用本地模拟数据。
+
 Test 是一个基于 Flutter 的纯前端抽卡 Demo，用于演示启动动画、四 Tab 页面、抽卡交互、图鉴筛选和前后端分离接入边界。
 
 当前仓库只负责 Flutter 客户端，抽卡接口、用户数据、概率、资源扣除和保底持久化由独立后端服务负责。默认使用本地 Mock，因此不依赖后端也可以启动和验收 UI。
