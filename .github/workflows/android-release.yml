@@ -47,7 +47,7 @@ jobs:
           trap 'rm -f android/upload.jks android/key.properties' EXIT
           printf '%s' "$KEYSTORE_BASE64" | base64 -d > android/upload.jks
           python3 scripts/write-signing-properties.py
-          flutter build appbundle --release --no-pub --build-number="$BUILD_NUMBER"
+          flutter build appbundle --release --build-number="$BUILD_NUMBER"
           jarsigner -verify build/app/outputs/bundle/release/app-release.aab | grep -F 'jar verified.'
       - uses: actions/upload-artifact@v7
         with:
