@@ -29,18 +29,24 @@ void main() {
     await tester.pumpAndSettle();
     expect(tester.widget<CheckboxListTile>(task).value, isTrue);
 
-    final remove = find.text('Remove completed');
+    final remove = find.widgetWithText(TextButton, 'Remove completed');
+    final cancel = find.text('Cancel');
     await tester.ensureVisible(remove);
-    await tester.tap(remove);
+    await tester.tap(remove.hitTestable());
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Cancel'));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 500));
+    await tester.tap(cancel);
     await tester.pumpAndSettle();
     expect(task, findsOneWidget);
 
-    await tester.ensureVisible(remove);
-    await tester.pumpAndSettle();
+    // Live devices can keep a modal barrier during the exit transition.
+    for (var attempt = 0; attempt < 40; attempt++) {
+      await tester.pump(const Duration(milliseconds: 100));
+      if (cancel.evaluate().isNotEmpty) continue;
+      await Scrollable.ensureVisible(tester.element(remove), alignment: 0.5);
+      if (remove.hitTestable().evaluate().isNotEmpty) break;
+    }
+    expect(cancel, findsNothing);
+    expect(remove.hitTestable(), findsOneWidget);
     await tester.tap(remove.hitTestable());
     await tester.pumpAndSettle();
     await tester.tap(find.text('Remove'));
