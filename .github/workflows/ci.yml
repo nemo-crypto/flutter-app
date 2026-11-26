@@ -84,12 +84,12 @@ jobs:
           xcrun simctl boot "$device_id"
           xcrun simctl bootstatus "$device_id" -b
       - name: Run iOS UI tests
-        timeout-minutes: 12
-        run: scripts/device-test.sh "$IOS_SIMULATOR_ID"
+        timeout-minutes: 20
+        run: scripts/ios-simulator-test.sh "$IOS_SIMULATOR_ID"
       - name: Shut down iOS simulator
         if: always() && env.IOS_SIMULATOR_ID != ''
         run: xcrun simctl shutdown "$IOS_SIMULATOR_ID" || true
-      - run: flutter build ios --simulator --debug --no-pub
+      - run: flutter build ios --simulator --debug
       - name: Package iOS simulator build
         run: ditto -c -k --keepParent build/ios/iphonesimulator/Runner.app ios-simulator.zip
       - uses: actions/upload-artifact@v7

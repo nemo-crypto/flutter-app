@@ -27,6 +27,8 @@ scripts/device-test.sh <device-id>
 
 在 iPhone 和 iPad 调整横竖屏、系统字号、深色模式和减少动态效果。真机回归时也检查软键盘遮挡、安全区、后台切回及 Android 返回键。设备脚本使用同一套 Flutter Integration Test，可在有已连接设备和签名配置的自托管 Runner 上执行。
 
+iOS 的云端测试通过 `scripts/ios-simulator-test.sh <simulator-id>` 运行同一套流程，从模拟器读取测试结果。该命令需要 Xcode 和 `jq`。
+
 ## 更换应用身份
 
 - Dart package 名称位于 `pubspec.yaml`，更名时同步替换 `package:flutter_starter/` 引用。
