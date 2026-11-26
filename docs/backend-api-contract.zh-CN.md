@@ -7,14 +7,14 @@
 默认启动使用本地 Mock：
 
 ```bash
-flutter run \
+flutter run --target lib/demo.dart \
   --dart-define=USE_MOCK_API=true
 ```
 
 联调真实后端时关闭 Mock 并传入服务地址：
 
 ```bash
-flutter run \
+flutter run --target lib/demo.dart \
   --dart-define=USE_MOCK_API=false \
   --dart-define=API_BASE_URL=https://api.example.com
 ```

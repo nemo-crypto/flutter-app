@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:unravel/core/data/demo_data.dart';
-import 'package:unravel/features/gacha/application/gacha_controller.dart';
-import 'package:unravel/features/gacha/data/gacha_repository.dart';
-import 'package:unravel/features/gacha/domain/gacha_models.dart';
+import 'package:flutter_starter/core/data/demo_data.dart';
+import 'package:flutter_starter/features/gacha/application/gacha_controller.dart';
+import 'package:flutter_starter/features/gacha/data/gacha_repository.dart';
+import 'package:flutter_starter/features/gacha/domain/gacha_models.dart';
 
 void main() {
   group('GachaController', () {

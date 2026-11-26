@@ -11,7 +11,7 @@
 ## 2. 根目录结构总览
 
 ```text
-unravel/
+flutter_starter/
 ├── lib/                 # Flutter/Dart 应用代码
 │   ├── app/              # 应用入口、主题接入和底部 Tab 容器
 │   ├── core/             # 配置、网络、颜色、主题、模型和 Demo 数据
@@ -35,7 +35,7 @@ unravel/
 
 ```mermaid
 flowchart TD
-    A[unravel] --> B[lib]
+    A[flutter_starter] --> B[lib]
     B --> B1[app]
     B --> B2[core]
     B --> B3[features]
@@ -164,7 +164,7 @@ Flutter 的跨平台能力来自“同一套 Dart 代码 + 各平台原生容器
 
 关键文件包括：
 
-- `android/app/src/main/kotlin/com/example/unravel/MainActivity.kt`
+- `android/app/src/main/kotlin/com/example/flutter_starter/MainActivity.kt`
 - `android/app/src/main/AndroidManifest.xml`
 - `android/app/build.gradle.kts`
 

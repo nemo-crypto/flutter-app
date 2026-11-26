@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:unravel/app/app.dart';
+import 'package:flutter_starter/app/app.dart';
 
 void main() {
   testWidgets('shows splash and enters the app shell', (
