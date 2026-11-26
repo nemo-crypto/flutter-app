@@ -1,11 +1,11 @@
 {
-    "name": "Unravel",
-    "short_name": "Unravel",
+    "name": "Flutter Starter",
+    "short_name": "Flutter Starter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Unravel Flutter project.",
+    "description": "Cross-platform Flutter application starter.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

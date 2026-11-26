@@ -1,4 +1,4 @@
-#include "unravel_application.h"
+#include "flutter_starter_application.h"
 
 #include <flutter_linux/flutter_linux.h>
 #ifdef GDK_WINDOWING_X11
@@ -7,21 +7,21 @@
 
 #include "flutter/generated_plugin_registrant.h"
 
-struct _UnravelApplication {
+struct _FlutterStarterApplication {
   GtkApplication parent_instance;
   char** dart_entrypoint_arguments;
 };
 
-G_DEFINE_TYPE(UnravelApplication, unravel_application, GTK_TYPE_APPLICATION)
+G_DEFINE_TYPE(FlutterStarterApplication, flutter_starter_application, GTK_TYPE_APPLICATION)
 
 // Called when first Flutter frame received.
-static void first_frame_cb(UnravelApplication* self, FlView* view) {
+static void first_frame_cb(FlutterStarterApplication* self, FlView* view) {
   gtk_widget_show(gtk_widget_get_toplevel(GTK_WIDGET(view)));
 }
 
 // Implements GApplication::activate.
-static void unravel_application_activate(GApplication* application) {
-  UnravelApplication* self = UNRAVEL_APPLICATION(application);
+static void flutter_starter_application_activate(GApplication* application) {
+  FlutterStarterApplication* self = FLUTTER_STARTER_APPLICATION(application);
   GtkWindow* window =
       GTK_WINDOW(gtk_application_window_new(GTK_APPLICATION(application)));
 
@@ -45,11 +45,11 @@ static void unravel_application_activate(GApplication* application) {
   if (use_header_bar) {
     GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
     gtk_widget_show(GTK_WIDGET(header_bar));
-    gtk_header_bar_set_title(header_bar, "Unravel");
+    gtk_header_bar_set_title(header_bar, "Flutter Starter");
     gtk_header_bar_set_show_close_button(header_bar, TRUE);
     gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
   } else {
-    gtk_window_set_title(window, "Unravel");
+    gtk_window_set_title(window, "Flutter Starter");
   }
 
   gtk_window_set_default_size(window, 1280, 720);
@@ -79,10 +79,10 @@ static void unravel_application_activate(GApplication* application) {
 }
 
 // Implements GApplication::local_command_line.
-static gboolean unravel_application_local_command_line(GApplication* application,
+static gboolean flutter_starter_application_local_command_line(GApplication* application,
                                                        gchar*** arguments,
                                                        int* exit_status) {
-  UnravelApplication* self = UNRAVEL_APPLICATION(application);
+  FlutterStarterApplication* self = FLUTTER_STARTER_APPLICATION(application);
   // Strip out the first argument as it is the binary name.
   self->dart_entrypoint_arguments = g_strdupv(*arguments + 1);
 
@@ -100,49 +100,49 @@ static gboolean unravel_application_local_command_line(GApplication* application
 }
 
 // Implements GApplication::startup.
-static void unravel_application_startup(GApplication* application) {
-  // UnravelApplication* self = UNRAVEL_APPLICATION(object);
+static void flutter_starter_application_startup(GApplication* application) {
+  // FlutterStarterApplication* self = FLUTTER_STARTER_APPLICATION(object);
 
   // Perform any actions required at application startup.
 
-  G_APPLICATION_CLASS(unravel_application_parent_class)->startup(application);
+  G_APPLICATION_CLASS(flutter_starter_application_parent_class)->startup(application);
 }
 
 // Implements GApplication::shutdown.
-static void unravel_application_shutdown(GApplication* application) {
-  // UnravelApplication* self = UNRAVEL_APPLICATION(object);
+static void flutter_starter_application_shutdown(GApplication* application) {
+  // FlutterStarterApplication* self = FLUTTER_STARTER_APPLICATION(object);
 
   // Perform any actions required at application shutdown.
 
-  G_APPLICATION_CLASS(unravel_application_parent_class)->shutdown(application);
+  G_APPLICATION_CLASS(flutter_starter_application_parent_class)->shutdown(application);
 }
 
 // Implements GObject::dispose.
-static void unravel_application_dispose(GObject* object) {
-  UnravelApplication* self = UNRAVEL_APPLICATION(object);
+static void flutter_starter_application_dispose(GObject* object) {
+  FlutterStarterApplication* self = FLUTTER_STARTER_APPLICATION(object);
   g_clear_pointer(&self->dart_entrypoint_arguments, g_strfreev);
-  G_OBJECT_CLASS(unravel_application_parent_class)->dispose(object);
+  G_OBJECT_CLASS(flutter_starter_application_parent_class)->dispose(object);
 }
 
-static void unravel_application_class_init(UnravelApplicationClass* klass) {
-  G_APPLICATION_CLASS(klass)->activate = unravel_application_activate;
+static void flutter_starter_application_class_init(FlutterStarterApplicationClass* klass) {
+  G_APPLICATION_CLASS(klass)->activate = flutter_starter_application_activate;
   G_APPLICATION_CLASS(klass)->local_command_line =
-      unravel_application_local_command_line;
-  G_APPLICATION_CLASS(klass)->startup = unravel_application_startup;
-  G_APPLICATION_CLASS(klass)->shutdown = unravel_application_shutdown;
-  G_OBJECT_CLASS(klass)->dispose = unravel_application_dispose;
+      flutter_starter_application_local_command_line;
+  G_APPLICATION_CLASS(klass)->startup = flutter_starter_application_startup;
+  G_APPLICATION_CLASS(klass)->shutdown = flutter_starter_application_shutdown;
+  G_OBJECT_CLASS(klass)->dispose = flutter_starter_application_dispose;
 }
 
-static void unravel_application_init(UnravelApplication* self) {}
+static void flutter_starter_application_init(FlutterStarterApplication* self) {}
 
-UnravelApplication* unravel_application_new() {
+FlutterStarterApplication* flutter_starter_application_new() {
   // Set the program name to the application ID, which helps various systems
   // like GTK and desktop environments map this running application to its
   // corresponding .desktop file. This ensures better integration by allowing
   // the application to be recognized beyond its binary name.
   g_set_prgname(APPLICATION_ID);
 
-  return UNRAVEL_APPLICATION(g_object_new(unravel_application_get_type(),
+  return FLUTTER_STARTER_APPLICATION(g_object_new(flutter_starter_application_get_type(),
                                           "application-id", APPLICATION_ID,
                                           "flags", G_APPLICATION_NON_UNIQUE,
                                           nullptr));

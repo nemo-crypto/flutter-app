@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "Unravel" "\0"
+            VALUE "FileDescription", "Flutter Starter" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "Unravel" "\0"
+            VALUE "InternalName", "Flutter Starter" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "unravel.exe" "\0"
-            VALUE "ProductName", "Unravel" "\0"
+            VALUE "OriginalFilename", "flutter_starter.exe" "\0"
+            VALUE "ProductName", "Flutter Starter" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
